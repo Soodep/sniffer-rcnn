@@ -116,11 +116,14 @@ class BBoxTestMixin:
             if rois[i].shape[0] == 0:
                 # There is no proposal in the single image
                 det_bbox = rois[i].new_zeros(0, 5)
+                #print("Mixins Det_Box_Test:",det_bbox)
                 det_label = rois[i].new_zeros((0, ), dtype=torch.long)
+                #print(det_label)
                 if rcnn_test_cfg is None:
                     det_bbox = det_bbox[:, :4]
                     det_label = rois[i].new_zeros(
                         (0, self.bbox_head.fc_cls.out_features))
+                    
 
             else:
                 det_bbox, det_label = self.bbox_head.get_bboxes(
@@ -133,6 +136,8 @@ class BBoxTestMixin:
                     cfg=rcnn_test_cfg)
             det_bboxes.append(det_bbox)
             det_labels.append(det_label)
+            #print(det_label)
+            #print("Mixins Det_Box_Test_else:",det_bboxes)
         return det_bboxes, det_labels
 
     def aug_test_bboxes(self, feats, img_metas, proposal_list, rcnn_test_cfg):

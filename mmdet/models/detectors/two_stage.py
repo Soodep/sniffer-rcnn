@@ -2,6 +2,8 @@
 import warnings
 
 import torch
+import numpy as np
+import time
 
 from ..builder import DETECTORS, build_backbone, build_head, build_neck
 from .base import BaseDetector
@@ -138,7 +140,8 @@ class TwoStageDetector(BaseDetector):
                 gt_bboxes,
                 gt_labels=None,
                 gt_bboxes_ignore=gt_bboxes_ignore,
-                proposal_cfg=proposal_cfg)
+                proposal_cfg=proposal_cfg,
+                **kwargs)
             losses.update(rpn_losses)
         else:
             proposal_list = proposals
@@ -150,7 +153,50 @@ class TwoStageDetector(BaseDetector):
         losses.update(roi_losses)
 
         return losses
+        '''
+        # Proposals
+        box_dir = '/home/UNT/sd0570/mmdetection/data/VOCdevkit/VOC2007/2dbox_train/'
+        img_id = img_metas[0]['filename'][34:40]
+        # print("ID", img_id)
+        idx = int(float(img_id))
+        box_2d_file = box_dir + 'bbox_{:06d}.txt'.format(idx)
+        with open(box_2d_file) as f:
+            arrays = [list(map(float, line.split(' '))) for line in f]
+        box = np.asarray(arrays)
+        pro_box = box[
+            (box[:, 0] >= 0) & (box[:, 0] <= 1242) & (box[:, 1] >= 0) & (box[:, 1] <= 375) & (box[:, 2] >= 0) & (
+                    box[:, 2] <= 1242) & (box[:, 3] >= 0) & (box[:, 3] <= 375)]
+        pro = torch.tensor(pro_box, dtype=torch.float, device='cuda')
+        prop = torch.flatten(pro, start_dim=1)
+        pro_list = []
+        pro_list.append(prop)
+        
+        # RPN forward and loss
+        if self.with_rpn:
+            proposal_cfg = self.train_cfg.get('rpn_proposal',
+                                              self.test_cfg.rpn)
+            rpn_losses, pro_list = self.rpn_head.forward_train(
+                x,
+                img_metas,
+                gt_bboxes,
+                gt_labels=None,
+                gt_bboxes_ignore=gt_bboxes_ignore,
+                proposal_cfg=proposal_cfg,
+                **kwargs)
+            losses.update(rpn_losses)
+        else:
+            proposal_list = proposals
 
+
+
+        roi_losses = self.roi_head.forward_train(x, img_metas, proposal_list,
+                                                 gt_bboxes, gt_labels,
+                                                 gt_bboxes_ignore, gt_masks,
+                                                 **kwargs)
+        losses.update(roi_losses)
+
+        return losses
+        '''
     async def async_simple_test(self,
                                 img,
                                 img_meta,
@@ -171,17 +217,54 @@ class TwoStageDetector(BaseDetector):
 
     def simple_test(self, img, img_metas, proposals=None, rescale=False):
         """Test without augmentation."""
+        #start_time = time.time()
 
+        assert self.with_bbox, 'Bbox head must be implemented.'
+        x = self.extract_feat(img)
+        
+        if proposals is None:
+            proposal_list = self.rpn_head.simple_test_rpn(x, img_metas)
+        else:
+            proposal_list = proposals
+        box_dir = '/home/UNT/sd0570/mmdetection/data/VOCdevkit/VOC2012/Lyamda/lyamda55/'
+        img_id = img_metas[0]['filename'][34:40]
+        print("ID", img_id)
+        idx = int(float(img_id))
+        box_2d_file = box_dir + 'bbox_{:06d}.txt'.format(idx)
+        #box_2d_file = '/home/UNT/sd0570/mmdetection/data/VOCdevkit/VOC2012/Lyamda/lyamda50/bbox_003251.txt'
+        with open(box_2d_file) as f:
+            arrays = [list(map(float, line.split(' '))) for line in f]
+        box = np.asarray(arrays)
+        pro_box = box[
+            (box[:, 0] >= 0) & (box[:, 0] <= 1242) & (box[:, 1] >= 0) & (box[:, 1] <= 375) & (box[:, 2] >= 0) & (
+                    box[:, 2] <= 1242) & (box[:, 3] >= 0) & (box[:, 3] <= 375)]
+        pro = torch.tensor(pro_box, dtype=torch.float, device='cuda')
+        prop = torch.flatten(pro, start_dim=1)
+        pro_list = []
+        pro_list.append(prop)
+        # cv2.rectangle(img_draw, left_top, right_bottom, (0, 255, 255), 2)
+        #print(len(pro_list))
+        #file = open('pro_list.txt', 'w')
+        #file.write(str(pro_list))
+        #return pro_list
+        return self.roi_head.simple_test(
+            x, pro_list, img_metas, rescale=rescale)
+        '''
         assert self.with_bbox, 'Bbox head must be implemented.'
         x = self.extract_feat(img)
         if proposals is None:
             proposal_list = self.rpn_head.simple_test_rpn(x, img_metas)
         else:
             proposal_list = proposals
+        #torch.set_printoptions(profile="full")
+        #print("Proposals: '\n' ", proposal_list)
+        #file = open('proposal_list_test_cascade.txt','a')
 
+        #file.write(str(proposal_list) + "\n")
+        return proposal_list
         return self.roi_head.simple_test(
             x, proposal_list, img_metas, rescale=rescale)
-
+        '''
     def aug_test(self, imgs, img_metas, rescale=False):
         """Test with augmentations.
 
@@ -208,3 +291,21 @@ class TwoStageDetector(BaseDetector):
                 f'list of supported models,'
                 f'https://mmdetection.readthedocs.io/en/latest/tutorials/pytorch2onnx.html#list-of-supported-models-exportable-to-onnx'  # noqa E501
             )
+
+# draw proposals on an image
+'''
+#start testing single image
+box_2d_file = '/home/UNT/sd0570/mmdetection/data/VOCdevkit/VOC2012/Lyamda/lyamda50/bbox_003282.txt'
+#end testing single image
+        with open(box_2d_file) as f:
+            arrays = [list(map(float, line.split(' '))) for line in f]
+        box = np.asarray(arrays)
+        pro_box = box[
+            (box[:, 0] >= 0) & (box[:, 0] <= 1242) & (box[:, 1] >= 0) & (box[:, 1] <= 375) & (box[:, 2] >= 0) & (
+                    box[:, 2] <= 1242) & (box[:, 3] >= 0) & (box[:, 3] <= 375)]
+        pro = torch.tensor(pro_box, dtype=torch.float, device='cuda')
+        prop = torch.flatten(pro, start_dim=1)
+        pro_list = []
+        pro_list.append(prop)
+        return pro_list
+'''

@@ -96,9 +96,10 @@ def tpfp_imagenet(det_bboxes,
          np.ones(gt_bboxes_ignore.shape[0], dtype=np.bool)))
     # stack gt_bboxes and gt_bboxes_ignore for convenience
     gt_bboxes = np.vstack((gt_bboxes, gt_bboxes_ignore))
-
+    print("Ground Truth",gt_bboxes)
     num_dets = det_bboxes.shape[0]
     num_gts = gt_bboxes.shape[0]
+    print("Number of Ground Truth", num_gts)
     if area_ranges is None:
         area_ranges = [(None, None)]
     num_scales = len(area_ranges)
@@ -124,6 +125,7 @@ def tpfp_imagenet(det_bboxes,
                           default_iou_thr)
     # sort all detections by scores in descending order
     sort_inds = np.argsort(-det_bboxes[:, -1])
+    #print("Bo--------------------------", sort_inds)
     for k, (min_area, max_area) in enumerate(area_ranges):
         gt_covered = np.zeros(num_gts, dtype=bool)
         # if no area range is specified, gt_area_ignore is all False
@@ -204,9 +206,11 @@ def tpfp_default(det_bboxes,
          np.ones(gt_bboxes_ignore.shape[0], dtype=np.bool)))
     # stack gt_bboxes and gt_bboxes_ignore for convenience
     gt_bboxes = np.vstack((gt_bboxes, gt_bboxes_ignore))
-
+    #print("Ground Truth", gt_bboxes)
     num_dets = det_bboxes.shape[0]
+    #print("Num of det boobocse", num_dets)
     num_gts = gt_bboxes.shape[0]
+    #print("Ground Truth",num_gts)
     if area_ranges is None:
         area_ranges = [(None, None)]
     num_scales = len(area_ranges)
@@ -236,6 +240,7 @@ def tpfp_default(det_bboxes,
     ious_argmax = ious.argmax(axis=1)
     # sort all dets in descending order by scores
     sort_inds = np.argsort(-det_bboxes[:, -1])
+    #print("Bo--------------------------", sort_inds)
     for k, (min_area, max_area) in enumerate(area_ranges):
         gt_covered = np.zeros(num_gts, dtype=bool)
         # if no area range is specified, gt_area_ignore is all False
@@ -349,6 +354,7 @@ def eval_map(det_results,
         extra_length = 1.
 
     num_imgs = len(det_results)
+    #print("Num img",num_imgs)
     num_scales = len(scale_ranges) if scale_ranges is not None else 1
     num_classes = len(det_results[0])  # positive class num
     area_ranges = ([(rg[0]**2, rg[1]**2) for rg in scale_ranges]
@@ -470,12 +476,15 @@ def print_map_summary(mean_ap,
 
     if scale_ranges is not None:
         assert len(scale_ranges) == num_scales
-
+    #print("The scale range:",scale_ranges)
     num_classes = len(results)
+    #print("The scale range:",num_classes)
 
     recalls = np.zeros((num_scales, num_classes), dtype=np.float32)
     aps = np.zeros((num_scales, num_classes), dtype=np.float32)
+    #print("The scale range aps:",aps)
     num_gts = np.zeros((num_scales, num_classes), dtype=int)
+    #print("The scale range gts:",num_gts)
     for i, cls_result in enumerate(results):
         if cls_result['recall'].size > 0:
             recalls[:, i] = np.array(cls_result['recall'], ndmin=2)[:, -1]
@@ -502,7 +511,10 @@ def print_map_summary(mean_ap,
                 label_names[j], num_gts[i, j], results[j]['num_dets'],
                 f'{recalls[i, j]:.3f}', f'{aps[i, j]:.3f}'
             ]
+
+            #print("Row data is:", row_data)
             table_data.append(row_data)
+
         table_data.append(['mAP', '', '', '', f'{mean_ap[i]:.3f}'])
         table = AsciiTable(table_data)
         table.inner_footing_row_border = True

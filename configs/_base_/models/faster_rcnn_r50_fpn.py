@@ -44,7 +44,7 @@ model = dict(
             in_channels=256,
             fc_out_channels=1024,
             roi_feat_size=7,
-            num_classes=80,
+            num_classes=2,
             bbox_coder=dict(
                 type='DeltaXYWHBBoxCoder',
                 target_means=[0., 0., 0., 0.],
@@ -95,14 +95,17 @@ model = dict(
             debug=False)),
     test_cfg=dict(
         rpn=dict(
-            nms_pre=1000,
-            max_per_img=1000,
-            nms=dict(type='nms', iou_threshold=0.7),
-            min_bbox_size=0),
+            nms_pre=200, #The number of boxes before NMS
+            max_per_img=200, # The number of boxes to be kept after NMS
+            nms=dict(type='nms', iou_threshold=0.7), #Type of NMS and threshold
+            min_bbox_size=0), # The allowed minimal box size
         rcnn=dict(
-            score_thr=0.05,
-            nms=dict(type='nms', iou_threshold=0.5),
-            max_per_img=100)
+            score_thr=0.05, # Threshold to filter out boxes
+            nms=dict(type='soft_nms', iou_threshold=0.5, min_score=0.05), # Config of NMS in the second stage
+            max_per_img=100) # Max number of detections of each image
         # soft-nms is also supported for rcnn testing
         # e.g., nms=dict(type='soft_nms', iou_threshold=0.5, min_score=0.05)
     ))
+#we select the predictions with the maximum confidence and suppress all the other predictions 
+#having overlap with the selected predictions greater than a threshold. In other words, we take the maximum and suppress the non-maximum ones
+#Once the detector outputs a large number of bounding boxes, it is necessary to filter out the best ones. NMS is the most commonly used algorithm for this task.

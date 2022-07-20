@@ -1,0 +1,244 @@
+bbox_003252.txt
+bbox_003229.txt
+523.14 167.57 546.74 226.85
+524.9 167.91 545.11 227.4
+bbox_003371.txt
+bbox_003338.txt
+bbox_003388.txt
+564.22 174.32 615.91 223.97
+563.55 175.78 616.72 224.22
+bbox_003399.txt
+bbox_003383.txt
+bbox_003331.txt
+bbox_003248.txt
+bbox_003309.txt
+592.22 182.12 659.06 234.35
+594.22 182.62 659.76 235.07
+bbox_003335.txt
+bbox_003297.txt
+bbox_003237.txt
+bbox_003285.txt
+bbox_003272.txt
+bbox_003296.txt
+bbox_003236.txt
+bbox_003275.txt
+237.06 192.08 313.95 227.87
+238.64 190.27 312.72 227.11
+bbox_003290.txt
+bbox_003329.txt
+bbox_003375.txt
+bbox_003300.txt
+bbox_003258.txt
+bbox_003373.txt
+bbox_003343.txt
+bbox_003292.txt
+bbox_003268.txt
+bbox_003216.txt
+303.3 196.77 340.12 227.03
+304.04 195.29 338.71 227.45
+bbox_003382.txt
+bbox_003203.txt
+bbox_003220.txt
+bbox_003228.txt
+bbox_003306.txt
+bbox_003225.txt
+bbox_003201.txt
+bbox_003286.txt
+bbox_003351.txt
+bbox_003395.txt
+bbox_003377.txt
+bbox_003202.txt
+bbox_003265.txt
+bbox_003281.txt
+bbox_003226.txt
+bbox_003241.txt
+621.29 173.04 647.6 194.52
+621.95 171.99 646.04 195.79
+bbox_003263.txt
+bbox_003362.txt
+bbox_003305.txt
+bbox_003322.txt
+bbox_003378.txt
+bbox_003348.txt
+bbox_003271.txt
+bbox_003255.txt
+bbox_003273.txt
+630.1 174.84 648.69 192.54
+628.74 174.2 648.93 191.36
+bbox_003356.txt
+593.56 182.46 658.87 234.72
+595.48 181.88 660.65 236.29
+bbox_003217.txt
+bbox_003218.txt
+bbox_003233.txt
+bbox_003307.txt
+bbox_003293.txt
+bbox_003321.txt
+bbox_003339.txt
+bbox_003209.txt
+bbox_003379.txt
+bbox_003208.txt
+bbox_003384.txt
+bbox_003372.txt
+bbox_003235.txt
+691.98 170.64 718.0 251.94
+690.25 171.45 716.01 252.01
+bbox_003370.txt
+bbox_003315.txt
+bbox_003365.txt
+bbox_003324.txt
+bbox_003333.txt
+bbox_003212.txt
+bbox_003219.txt
+bbox_003278.txt
+bbox_003325.txt
+bbox_003393.txt
+bbox_003390.txt
+836.52 182.82 872.66 223.78
+835.37 183.24 871.84 225.51
+bbox_003259.txt
+bbox_003334.txt
+bbox_003359.txt
+bbox_003345.txt
+bbox_003312.txt
+bbox_003274.txt
+bbox_003223.txt
+bbox_003288.txt
+bbox_003224.txt
+bbox_003295.txt
+bbox_003243.txt
+bbox_003368.txt
+bbox_003245.txt
+bbox_003302.txt
+589.47 181.64 612.38 199.48
+590.88 180.26 612.67 201.02
+bbox_003336.txt
+bbox_003210.txt
+bbox_003360.txt
+667.78 177.42 727.29 218.23
+667.35 176.24 728.51 216.67
+bbox_003344.txt
+bbox_003298.txt
+bbox_003249.txt
+bbox_003391.txt
+bbox_003320.txt
+bbox_003386.txt
+bbox_003357.txt
+661.0 170.04 712.65 214.13
+661.26 170.07 711.11 213.68
+bbox_003376.txt
+bbox_003231.txt
+bbox_003276.txt
+bbox_003310.txt
+bbox_003352.txt
+541.69 180.72 573.55 208.93
+543.5 180.01 575.02 209.14
+bbox_003242.txt
+bbox_003366.txt
+bbox_003282.txt
+bbox_003369.txt
+bbox_003340.txt
+bbox_003387.txt
+bbox_003341.txt
+bbox_003367.txt
+bbox_003318.txt
+bbox_003385.txt
+bbox_003319.txt
+bbox_003392.txt
+696.25 181.14 736.87 221.65
+696.31 181.55 738.44 220.28
+bbox_003256.txt
+bbox_003316.txt
+bbox_003314.txt
+bbox_003215.txt
+bbox_003240.txt
+bbox_003299.txt
+bbox_003289.txt
+bbox_003207.txt
+bbox_003346.txt
+bbox_003222.txt
+bbox_003238.txt
+bbox_003246.txt
+bbox_003250.txt
+bbox_003266.txt
+bbox_003200.txt
+bbox_003396.txt
+bbox_003326.txt
+bbox_003355.txt
+bbox_003213.txt
+bbox_003214.txt
+576.95 177.28 619.35 213.18
+575.03 177.66 619.67 211.83
+bbox_003330.txt
+bbox_003267.txt
+656.31 178.48 674.21 192.64
+654.33 176.86 674.3 193.62
+bbox_003313.txt
+bbox_003277.txt
+bbox_003230.txt
+bbox_003261.txt
+bbox_003381.txt
+bbox_003257.txt
+bbox_003294.txt
+400.1 158.91 422.69 219.02
+399.86 157.73 421.98 219.86
+bbox_003270.txt
+bbox_003211.txt
+bbox_003301.txt
+bbox_003269.txt
+bbox_003206.txt
+bbox_003221.txt
+bbox_003308.txt
+bbox_003260.txt
+bbox_003337.txt
+bbox_003398.txt
+bbox_003283.txt
+bbox_003353.txt
+bbox_003232.txt
+bbox_003251.txt
+bbox_003389.txt
+bbox_003264.txt
+bbox_003244.txt
+bbox_003380.txt
+bbox_003284.txt
+bbox_003287.txt
+bbox_003332.txt
+bbox_003239.txt
+bbox_003363.txt
+bbox_003364.txt
+bbox_003361.txt
+bbox_003254.txt
+684.13 176.12 712.4 240.21
+682.64 175.89 712.65 239.36
+bbox_003279.txt
+bbox_003262.txt
+bbox_003280.txt
+500.86 185.89 556.09 228.37
+501.54 186.6 554.75 228.36
+bbox_003323.txt
+bbox_003354.txt
+bbox_003327.txt
+bbox_003342.txt
+bbox_003347.txt
+bbox_003317.txt
+0.0 128.86 21.44 246.51
+0.0 130.42 20.028 245.6
+bbox_003253.txt
+bbox_003234.txt
+bbox_003204.txt
+bbox_003227.txt
+bbox_003304.txt
+401.73 193.81 456.6 229.59
+400.2 192.88 457.47 228.45
+bbox_003349.txt
+bbox_003247.txt
+bbox_003311.txt
+bbox_003291.txt
+bbox_003374.txt
+bbox_003397.txt
+bbox_003328.txt
+bbox_003394.txt
+bbox_003350.txt
+bbox_003358.txt
+bbox_003205.txt
+bbox_003303.txt

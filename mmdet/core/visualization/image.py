@@ -84,6 +84,7 @@ def imshow_det_bboxes(img,
         scores = bboxes[:, -1]
         inds = scores > score_thr
         bboxes = bboxes[inds, :]
+        #print("yoo",bb)
         labels = labels[inds]
         if segms is not None:
             segms = segms[inds, ...]
@@ -135,6 +136,7 @@ def imshow_det_bboxes(img,
         bbox_int = bbox.astype(np.int32)
         poly = [[bbox_int[0], bbox_int[1]], [bbox_int[0], bbox_int[3]],
                 [bbox_int[2], bbox_int[3]], [bbox_int[2], bbox_int[1]]]
+        print("Bounding Boxes Image.py",bbox_int)
         np_poly = np.array(poly).reshape((4, 2))
         polygons.append(Polygon(np_poly))
         color.append(bbox_color)
@@ -276,8 +278,10 @@ def imshow_gt_det_bboxes(img,
             segm_result = segm_result[0]  # ms rcnn
     else:
         bbox_result, segm_result = result, None
-
+    print("Bo--------------------------", bbox_result)
     bboxes = np.vstack(bbox_result)
+    print("Bo--------------------------", bboxes)
+
     labels = [
         np.full(bbox.shape[0], i, dtype=np.int32)
         for i, bbox in enumerate(bbox_result)

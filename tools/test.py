@@ -18,7 +18,7 @@ from mmdet.datasets import (build_dataloader, build_dataset,
                             replace_ImageToTensor)
 from mmdet.models import build_detector
 
-
+import time
 def parse_args():
     parser = argparse.ArgumentParser(
         description='MMDet test (and eval) a model')
@@ -105,6 +105,7 @@ def parse_args():
 
 
 def main():
+
     args = parse_args()
 
     assert args.out or args.eval or args.format_only or args.show \
@@ -235,4 +236,6 @@ def main():
 
 
 if __name__ == '__main__':
+    start_time = time.time()
     main()
+    print("--- %s seconds ---" % (time.time() - start_time))

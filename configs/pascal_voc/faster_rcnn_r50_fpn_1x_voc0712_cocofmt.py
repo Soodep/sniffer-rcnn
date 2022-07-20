@@ -2,14 +2,11 @@ _base_ = [
     '../_base_/models/faster_rcnn_r50_fpn.py', '../_base_/datasets/voc0712.py',
     '../_base_/default_runtime.py'
 ]
-model = dict(roi_head=dict(bbox_head=dict(num_classes=20)))
-
-CLASSES = ('aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car',
-           'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike',
-           'person', 'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor')
+model = dict(roi_head=dict(bbox_head=dict(num_classes=2)))
+CLASSES = ('car','person')
 
 # dataset settings
-dataset_type = 'CocoDataset'
+dataset_type = 'VOCDataset'
 data_root = 'data/VOCdevkit/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -27,7 +24,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(1000, 600),
+        img_scale=(1375, 375),
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
@@ -58,11 +55,11 @@ data = dict(
         classes=CLASSES),
     test=dict(
         type=dataset_type,
-        ann_file='data/voc07_test.json',
-        img_prefix='data/VOCdevkit',
+        ann_file=data_root + 'VOC2012/ImageSets/Main/test_fast.txt',
+        img_prefix=data_root + 'VOC2012/',
         pipeline=test_pipeline,
         classes=CLASSES))
-evaluation = dict(interval=1, metric='bbox')
+evaluation = dict(interval=1, metric='mAP')
 
 # optimizer
 optimizer = dict(type='SGD', lr=0.01, momentum=0.9, weight_decay=0.0001)

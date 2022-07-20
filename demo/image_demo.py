@@ -27,9 +27,15 @@ def main(args):
     # build the model from a config file and a checkpoint file
     model = init_detector(args.config, args.checkpoint, device=args.device)
     # test a single image
+    '''
     result = inference_detector(model, args.img)
     # show the results
     show_result_pyplot(model, args.img, result, score_thr=args.score_thr)
+    '''
+    result = inference_detector(model, args.img).cpu().numpy()
+    #result = inference_detector(model, args.img)
+    from mmcv import imshow_bboxes
+    imshow_bboxes(args.img, result, out_file='003251_sniffer.png', show=False)
 
 
 async def async_main(args):

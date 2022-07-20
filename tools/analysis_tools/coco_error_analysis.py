@@ -46,7 +46,7 @@ def makeplot(rs, ps, outDir, class_name, iou_type):
         plt.ylim(0, 1.0)
         plt.title(figure_title)
         plt.legend()
-        # plt.show()
+        plt.show()
         fig.savefig(outDir + f'/{figure_title}.png')
         plt.close(fig)
 

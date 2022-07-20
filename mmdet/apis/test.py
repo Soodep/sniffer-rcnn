@@ -22,6 +22,7 @@ def single_gpu_test(model,
     model.eval()
     results = []
     dataset = data_loader.dataset
+    #print("SIngle GPU TEst dataset:", dataset)
     prog_bar = mmcv.ProgressBar(len(dataset))
     for i, data in enumerate(data_loader):
         with torch.no_grad():
@@ -61,7 +62,7 @@ def single_gpu_test(model,
             result = [(bbox_results, encode_mask_results(mask_results))
                       for bbox_results, mask_results in result]
         results.extend(result)
-
+        #print("The result of tuple is",result)
         for _ in range(batch_size):
             prog_bar.update()
     return results

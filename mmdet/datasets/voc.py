@@ -10,11 +10,13 @@ from .xml_style import XMLDataset
 
 @DATASETS.register_module()
 class VOCDataset(XMLDataset):
-
+    '''
     CLASSES = ('aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car',
                'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse',
                'motorbike', 'person', 'pottedplant', 'sheep', 'sofa', 'train',
                'tvmonitor')
+    '''           
+    CLASSES = ('car','person')
 
     def __init__(self, **kwargs):
         super(VOCDataset, self).__init__(**kwargs)
@@ -30,7 +32,7 @@ class VOCDataset(XMLDataset):
                  metric='mAP',
                  logger=None,
                  proposal_nums=(100, 300, 1000),
-                 iou_thr=0.5,
+                 iou_thr=[0.5],
                  scale_ranges=None):
         """Evaluate in VOC protocol.
 
